@@ -1,0 +1,13 @@
+[Unit]
+Description=Qemuagent for vm: '%i'
+
+[Service]
+WorkingDirectory=/home/fess932/git/os
+ExecStart=/usr/bin/qemu-system-x86_64  \
+                -cpu host -machine type=q35,accel=kvm -m 2048 \
+                -snapshot \
+                -drive if=virtio,format=qcow2,file=%i.img \
+                -drive if=virtio,format=raw,file=seed.img
+
+[Install]
+WantedBy=multi-user.target
